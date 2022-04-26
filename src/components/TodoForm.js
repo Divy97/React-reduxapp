@@ -15,8 +15,23 @@ import {addTodo} from "../action/Todo";
 const TodoForm = ({addTodo}) => {
 
     const [title, setTitle] = useState("");
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        if(title === ""){
+            alert("Please add a todo");
+        }
+
+        const todo = {
+            title,
+            id : v4()
+        }
+
+        addTodo(todo);
+        setTitle('');
+    }
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
         <FormGroup>
             <InputGroup>
                 <Input
@@ -24,9 +39,11 @@ const TodoForm = ({addTodo}) => {
                 name="todo"
                 id="todo"
                 placeHolder="your next todo"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
                 />
                 <InputGroup addOnType="append">
-                    <Button color="primary">ADD</Button>
+                    <Button color="primary" onClick={handleSubmit}>ADD</Button>   
                 </InputGroup>
             </InputGroup>
         </FormGroup>
@@ -34,7 +51,14 @@ const TodoForm = ({addTodo}) => {
   )
 }
 
-export default TodoForm; //TODO:
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+    addTodo: todo => {
+        dispatch(addTodo(todo))
+    }
+})
+export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)
 
 
 

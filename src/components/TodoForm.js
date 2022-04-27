@@ -42,9 +42,7 @@ const TodoForm = ({addTodo}) => {
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 />
-                <InputGroup addOnType="append">
-                    <Button color="primary" onClick={handleSubmit}>ADD</Button>   
-                </InputGroup>
+                <Button color="primary" onClick={handleSubmit}>ADD</Button>   
             </InputGroup>
         </FormGroup>
     </Form>
